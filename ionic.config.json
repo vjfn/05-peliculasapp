@@ -1,0 +1,7 @@
+{
+  "name": "04-peliculasapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
