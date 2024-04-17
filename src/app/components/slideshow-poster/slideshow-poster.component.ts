@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Pelicula } from 'src/app/interfaces/interfaces';
+import { DetalleComponent } from '../detalle/detalle.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-slideshow-poster',
@@ -10,8 +12,19 @@ export class SlideshowPosterComponent  implements OnInit {
 
   @Input() peliculas: Pelicula [] = [];
 
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {}
+
+  async verDetalle(id:any){
+    const  modal = await this.modalController.create({
+      component: DetalleComponent,
+      componentProps:{
+        id
+      }
+    });
+    modal.present();
+
+  }
 
 }

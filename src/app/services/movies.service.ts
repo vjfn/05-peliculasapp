@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Genre, RespuestaMDB } from '../interfaces/interfaces';
+import { Genre, PeliculaDetalle, RespuestaCredits, RespuestaMDB } from '../interfaces/interfaces';
 import { environment } from 'src/environments/environment';
 
 
 const URL    = environment.url;
 const apiKey = environment.apiKey;
+const language = environment.language;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +21,7 @@ export class MoviesService {
   private ejecutarQuery<T>(query: string){
 
     query = URL + query;
-    query += `&api_key=${apiKey}&language=es&include_image_language=es`;
+    query += `&api_key=${apiKey}&language=${language}&include_image_language=${language}`;
 
     return this.http.get<T>(query);
 
@@ -35,6 +37,10 @@ export class MoviesService {
 
   }
 
+  buscarPeliculas( texto: string ) {
+    return this.ejecutarQuery(`/search/movie?query=${ texto }`);
+
+  }
 
       
   /* 'https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2024-01-01&primary_release_date.lte=2024-4-15&api_key=1865f43a0549ca50d341dd9ab8b29f49&language=es&include_image_language=es'; */
@@ -63,4 +69,30 @@ export class MoviesService {
 
 
   }
+
+  getPeliculaDetalle( id: string ) {
+    return this.ejecutarQuery<PeliculaDetalle>(`/movie/${ id }?a=1`);
+  }
+
+  getActoresPelicula( id: string ) {
+    return this.ejecutarQuery<RespuestaCredits>(`/movie/${ id }/credits?a=1`);
+  }
+
+  cargarGeneros(): Promise<Genre[]> {
+
+    return new Promise( resolve => {
+
+      this.ejecutarQuery(`/genre/movie/list?a=1`)
+        .subscribe( (resp : any )=> {
+          this.generos = resp['genres'];
+          console.log(this.generos);
+          resolve(this.generos);
+        });
+
+    });
+
+
+  }
+
+
 }

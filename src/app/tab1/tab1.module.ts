@@ -18,7 +18,7 @@ import { ComponentsModule } from '../components/components.module';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
     PipesModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [Tab1Page],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

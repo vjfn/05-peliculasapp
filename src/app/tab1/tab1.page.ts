@@ -10,9 +10,9 @@ import { Pelicula } from '../interfaces/interfaces';
 })
 export class Tab1Page implements OnInit {
 
-
   peliculasRecientes: Pelicula[] = [];
   populares: Pelicula[] = [];
+
 
 
 
@@ -21,13 +21,24 @@ export class Tab1Page implements OnInit {
   ngOnInit() {
     this.moviesService.getFeature()
     .subscribe( resp => {
-
       this.peliculasRecientes = resp.results;
     });
-    this.moviesService.getPopulares().subscribe( resp => {
-      console.log('Populares', resp);
-      this.populares = resp.results;
-    });
+
+    this.getPopulares();
   }
 
+  getPopulares(){
+    this.moviesService.getPopulares()
+    .subscribe( resp => {
+
+      const arrTemp = [...this.populares, ...resp.results];
+      this.populares = arrTemp;
+    });
+
+  }
+
+
+  cargarMas() {
+    this.getPopulares();
+  }
 }
