@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MoviesService } from '../services/movies.service';
 import { Genre, PeliculaDetalle } from '../interfaces/interfaces';
 import { DataLocalService } from '../services/data-local.service';
@@ -8,7 +8,7 @@ import { DataLocalService } from '../services/data-local.service';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page implements OnInit {
+export class Tab3Page {
 
   peliculas: PeliculaDetalle[] = [];
   generos: Genre[] = [];
@@ -18,12 +18,17 @@ export class Tab3Page implements OnInit {
   constructor( private dataLocal: DataLocalService,
     private moviesService: MoviesService) { }
 
-  async ngOnInit() {
+
+
+    //Funcion que se ejecuta automaticamente al cambiar de pagina
+  async ionViewDidEnter() {
     this.peliculas = await this.dataLocal.cargarFavoritos();
     this.generos = await this.moviesService.cargarGeneros();
 
     this.pelisPorGenero( this.generos, this.peliculas);
   }
+
+
 
 pelisPorGenero( generos: Genre[], peliculas: PeliculaDetalle[]  ) {
 
@@ -44,6 +49,11 @@ pelisPorGenero( generos: Genre[], peliculas: PeliculaDetalle[]  ) {
     console.log(this.favoritoGenero);
 
 
+  }
+
+  refreshPage() {
+    // Método para refrescar la página
+    this.ionViewDidEnter();
   }
 
 

@@ -1,7 +1,7 @@
 {
-  "name": "04-peliculasapp",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "Cartelera Victoriosa",
+  "version": "1.0.0",
+  "author": "VictorJesusFernandezNoguer",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^17.0.2",
     "@angular/router": "^17.0.2",
     "@capacitor-community/sqlite": "^5.7.2",
+    "@capacitor/android": "5.7.4",
     "@capacitor/app": "5.0.7",
     "@capacitor/core": "^5.7.4",
     "@capacitor/haptics": "5.0.7",
@@ -47,6 +48,7 @@
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.2",
     "@angular/language-service": "^17.0.2",
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^5.7.4",
     "@ionic/angular-toolkit": "^11.0.1",
     "@types/jasmine": "~5.1.0",

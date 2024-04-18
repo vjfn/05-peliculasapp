@@ -18,7 +18,7 @@
         </ion-col>
       </ion-row>
       
-      <app-slideshow-poster [peliculas]="pelicula.pelis"></app-slideshow-poster>
+      <app-slideshow-poster [peliculas]="pelicula.pelis" (modalClosed)="refreshPage()"></app-slideshow-poster>
 
     </ion-grid>
 

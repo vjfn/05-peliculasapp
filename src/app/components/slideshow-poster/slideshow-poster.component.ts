@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pelicula } from 'src/app/interfaces/interfaces';
 import { DetalleComponent } from '../detalle/detalle.component';
 import { ModalController } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 export class SlideshowPosterComponent  implements OnInit {
 
   @Input() peliculas: Pelicula [] = [];
+  @Output() modalClosed: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private modalController: ModalController) { }
 
@@ -23,6 +24,11 @@ export class SlideshowPosterComponent  implements OnInit {
         id
       }
     });
+
+    modal.onDidDismiss().then(() => {
+      this.modalClosed.emit(); // Emite el evento cuando se cierra el modal
+    });
+    
     modal.present();
 
   }
