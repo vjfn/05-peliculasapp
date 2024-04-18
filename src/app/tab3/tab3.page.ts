@@ -13,9 +13,7 @@ export class Tab3Page implements OnInit {
   peliculas: PeliculaDetalle[] = [];
   generos: Genre[] = [];
 
-  favoritoGenero: any[] = [{
-
-  }];
+  favoritoGenero: any[] = [];
 
   constructor( private dataLocal: DataLocalService,
     private moviesService: MoviesService) { }
@@ -24,20 +22,20 @@ export class Tab3Page implements OnInit {
     this.peliculas = await this.dataLocal.cargarFavoritos();
     this.generos = await this.moviesService.cargarGeneros();
 
-/*     this.pelisPorGenero( this.generos, this.peliculas); */
+    this.pelisPorGenero( this.generos, this.peliculas);
   }
 
-/* pelisPorGenero( generos: Genre[], peliculas: PeliculaDetalle[]  ) {
+pelisPorGenero( generos: Genre[], peliculas: PeliculaDetalle[]  ) {
 
 
     this.favoritoGenero = [];
 
     generos.forEach( (genero : any) => {
-
+      
       this.favoritoGenero.push({
         genero: genero.name,
         pelis: peliculas.filter( peli => {
-          return peli.genres.find( genre => genre.id === genero.id );
+          return peli.genres?.find( genre => genre.id === genero.id );
         })
       });
 
@@ -47,6 +45,6 @@ export class Tab3Page implements OnInit {
 
 
   }
- */
+
 
 }
